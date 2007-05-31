@@ -1,9 +1,12 @@
 %define LANG pt_BR
+%define name man-pages-%LANG
+%define version 0.1
+%define release %mkrel 2
 
 Summary:	Brazilian man (manual) pages from the Linux Documentation Project.
-Name:		man-pages-%LANG
-Version:	0.1
-Release:	1mdk
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
 License:	GPL
 Group:	System/Internationalization
 URL: 	http://br.tldp.org/projetos/man/man.html
@@ -14,11 +17,8 @@ Source:	http://br.tldp.org/projetos/man/arquivos/man-pages-pt_BR.tar.bz2
 Buildroot: %_tmppath/%name-root
 BuildRequires: man => 1.5j-8mdk
 Requires: locales-pt, man => 1.5j-8mdk
-Prereq: sed grep man
 Autoreqprov: false
 BuildArchitectures: noarch
-Obsoletes: man-%LANG, manpages-%LANG
-Provides: man-%LANG, manpages-%LANG
 
 %description
 A large collection of man pages (reference material) from the Linux 
@@ -35,8 +35,6 @@ The man pages are organized into the following sections:
         Section 8:  System administration (intro only)
         Section 9:  Kernel routines
 
-%define _mandir2 /usr/X11R6/man
-
 %prep
 %setup -n man-pages-pt_BR
 
@@ -45,7 +43,6 @@ The man pages are organized into the following sections:
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%_mandir/%LANG/man{1,2,3,4,5,6,7,8}
-mkdir -p $RPM_BUILD_ROOT/var/catman/%LANG/cat{1,2,3,4,5,6,7,8,9,n}
 
 for i in 1 2 3 4 5 6 7 8 ; do
 	cp -adpvrf man$i $RPM_BUILD_ROOT/%_mandir/%LANG/||:
@@ -63,17 +60,6 @@ chmod a+x $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis-%LANG.cron
 
 mkdir -p  $RPM_BUILD_ROOT/var/cache/man/%LANG
 
-
-%postun
-# 0 means deleting the package
-if [ "$1" = "0" ]; then
-   ## Force removing of /var/catman/%LANG, if there isn't any man page
-   ## directory /%_mandir/%LANG
-   if [ ! -d %_mandir/%LANG ] ; then
-       rm -rf /var/catman/%LANG
-   fi
-fi
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -83,8 +69,5 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/cache/man/%LANG
 %verify(not md5 mtime size) /var/cache/man/%LANG/whatis
 %_mandir/%LANG/man*
-#%dir %_mandir2/%LANG
-#%_mandir2/%LANG/man*
-%attr(755,root,man)/var/catman/%LANG
 %config(noreplace) %attr(755,root,root)/etc/cron.weekly/makewhatis-%LANG.cron
 
