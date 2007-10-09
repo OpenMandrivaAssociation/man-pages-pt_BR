@@ -3,7 +3,7 @@
 %define version 0.1
 %define release %mkrel 2
 
-Summary:	Brazilian man (manual) pages from the Linux Documentation Project.
+Summary:	Brazilian man (manual) pages from the Linux Documentation Project
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
