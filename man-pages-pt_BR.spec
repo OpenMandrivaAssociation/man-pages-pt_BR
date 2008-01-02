@@ -14,6 +14,7 @@ URL: 	http://br.tldp.org/projetos/man/man.html
 # files dated 2002-11-21 -- pablo
 Source:	http://br.tldp.org/projetos/man/arquivos/man-pages-pt_BR.tar.bz2
 #Icon:		books-%LANG.xpm
+Buildroot: %_tmppath/%name-root
 BuildRequires: man => 1.5j-8mdk
 Requires: locales-pt, man => 1.5j-8mdk
 Autoreqprov: false
