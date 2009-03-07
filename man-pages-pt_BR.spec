@@ -1,7 +1,7 @@
 %define LANG pt_BR
 %define name man-pages-%LANG
 %define version 0.1
-%define release %mkrel 5
+%define release %mkrel 6
 
 Summary:	Brazilian man (manual) pages from the Linux Documentation Project
 Name:		%{name}
