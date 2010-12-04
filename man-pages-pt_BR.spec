@@ -1,5 +1,5 @@
-%define LANG pt_BR
-%define name man-pages-%LANG
+%define LNG pt_BR
+%define name man-pages-%LNG
 %define version 0.1
 %define release %mkrel 8
 
@@ -13,8 +13,8 @@ URL: 	http://br.tldp.org/projetos/man/man.html
 # the tarball has to build, files got from the web with wget.
 # files dated 2002-11-21 -- pablo
 Source:	http://br.tldp.org/projetos/man/arquivos/man-pages-pt_BR.tar.bz2
-#Icon:		books-%LANG.xpm
-Buildroot: %_tmppath/%name-root
+#Icon:		books-%LNG.xpm
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: man => 1.5j-8mdk
 Requires: locales-pt, man => 1.5j-8mdk
 Autoreqprov: false
@@ -29,7 +29,7 @@ The man pages are organized into the following sections:
         Section 2:  System calls
         Section 3:  Libc calls
         Section 4:  Devices (e.g., hd, sd)
-        Section 5:  File formats and protocols (e.g., wtmp, /etc/passwd, nfs)
+        Section 5:  File formats and protocols (e.g., wtmp, %{_sysconfdir}passwd, nfs)
         Section 5:  Games (intro only)
         Section 7:  Conventions, macro packages, etc. (e.g., nroff, ascii)
         Section 8:  System administration (intro only)
@@ -41,37 +41,38 @@ The man pages are organized into the following sections:
 %build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/%_mandir/%LANG/man{1,2,3,4,5,6,7,8}
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/%_mandir/%LNG/man{1,2,3,4,5,6,7,8}
 
 for i in 1 2 3 4 5 6 7 8 ; do
-	cp -adpvrf man$i $RPM_BUILD_ROOT/%_mandir/%LANG/||:
+	cp -adpvrf man$i %{buildroot}/%_mandir/%LNG/||:
 done
 
-LANG=%LANG DESTDIR=$RPM_BUILD_ROOT %_sbindir/makewhatis $RPM_BUILD_ROOT/%_mandir/%LANG
+LANG=%LNG DESTDIR=%{buildroot} %_sbindir/makewhatis %{buildroot}/%_mandir/%LNG
 
-mkdir -p $RPM_BUILD_ROOT/etc/cron.weekly
-cat > $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis-%LANG.cron << EOF
+mkdir -p %{buildroot}%{_sysconfdir}/cron.weekly
+cat > %{buildroot}%{_sysconfdir}/cron.weekly/makewhatis-%LNG.cron << EOF
 #!/bin/bash
-LANG=%LANG %_sbindir/makewhatis %_mandir/%LANG
+LANG=%LNG %_sbindir/makewhatis %_mandir/%LNG
 exit 0
 EOF
-chmod a+x $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis-%LANG.cron
+chmod a+x %{buildroot}%{_sysconfdir}/cron.weekly/makewhatis-%LNG.cron
 
-mkdir -p  $RPM_BUILD_ROOT/var/cache/man/%LANG
+mkdir -p  %{buildroot}/var/cache/man/%LNG
 
-touch $RPM_BUILD_ROOT/var/cache/man/%LNG/whatis
+touch %{buildroot}/var/cache/man/%LNG/whatis
 
 %post
 %create_ghostfile /var/cache/man/%LNG/whatis root root 644
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(0644,root,man,755)
-%dir %_mandir/%LANG
-%dir /var/cache/man/%LANG
+%dir %_mandir/%LNG
+%dir /var/cache/man/%LNG
 %ghost %config(noreplace) /var/cache/man/%LNG/whatis
-%_mandir/%LANG/man*
-%config(noreplace) %attr(755,root,root)/etc/cron.weekly/makewhatis-%LANG.cron
+%_mandir/%LNG/man*
+%_mandir/%LNG/whatis
+%config(noreplace) %attr(755,root,root) %{_sysconfdir}/cron.weekly/makewhatis-%LNG.cron
