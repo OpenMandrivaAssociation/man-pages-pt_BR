@@ -1,7 +1,7 @@
 %define LNG pt_BR
 %define name man-pages-%LNG
 %define version 0.1
-%define release %mkrel 9
+%define release %mkrel 10
 
 Summary:	Brazilian man (manual) pages from the Linux Documentation Project
 Name:		%{name}
