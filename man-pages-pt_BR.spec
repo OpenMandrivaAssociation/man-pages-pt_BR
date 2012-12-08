@@ -1,7 +1,7 @@
 %define LNG pt_BR
 %define name man-pages-%LNG
 %define version 0.1
-%define release %mkrel 10
+%define release %mkrel 11
 
 Summary:	Brazilian man (manual) pages from the Linux Documentation Project
 Name:		%{name}
@@ -76,3 +76,45 @@ rm -rf %{buildroot}
 %_mandir/%LNG/man*
 %_mandir/%LNG/whatis
 %config(noreplace) %attr(755,root,root) %{_sysconfdir}/cron.weekly/makewhatis-%LNG.cron
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 0.1-10mdv2011.0
++ Revision: 666375
+- mass rebuild
+
+* Sat Dec 04 2010 Oden Eriksson <oeriksson@mandriva.com> 0.1-9mdv2011.0
++ Revision: 609326
+- rebuild
+- fix build
+- fix typos
+- fix build
+- rebuild
+- rebuilt for 2010.1
+
+* Sat Mar 07 2009 Antoine Ginies <aginies@mandriva.com> 0.1-6mdv2009.1
++ Revision: 351583
+- rebuild
+
+* Tue Jun 17 2008 Thierry Vignaud <tv@mandriva.org> 0.1-5mdv2009.0
++ Revision: 223193
+- rebuild
+
+* Tue Jan 15 2008 Thierry Vignaud <tv@mandriva.org> 0.1-4mdv2008.1
++ Revision: 152990
+- rebuild
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+- fix summary-ended-with-dot
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Thu May 31 2007 Adam Williamson <awilliamson@mandriva.org> 0.1-2mdv2008.0
++ Revision: 33477
+- rebuild for new era; drop /var/catman (wildly obsolete)
+
+
+* Wed Jul 23 2003 Pablo Saratxaga <pablo@mandrakesoft.com> 0.1-1mdk
+- first package
+
