@@ -3,7 +3,7 @@
 Summary:	Brazilian man (manual) pages from the Linux Documentation Project
 Name:		man-pages-%{LNG}
 Version:	0.1
-Release:	19
+Release:	20
 License:	GPLv2
 Group:		System/Internationalization
 Url:		http://br.tldp.org/projetos/man/man.html
@@ -62,7 +62,6 @@ touch %{buildroot}/var/cache/man/%{LNG}/whatis
 %create_ghostfile /var/cache/man/%{LNG}/whatis root root 644
 
 %files
-%dir %{_mandir}/%{LNG}
 %dir /var/cache/man/%{LNG}
 %ghost %config(noreplace) /var/cache/man/%{LNG}/whatis
 %{_mandir}/%{LNG}/man*
@@ -70,4 +69,3 @@ touch %{buildroot}/var/cache/man/%{LNG}/whatis
 %{_mandir}/%{LNG}/CACHEDIR.TAG*
 %{_mandir}/%{LNG}/index.db*
 %config(noreplace) %attr(755,root,root) %{_sysconfdir}/cron.weekly/makewhatis-%{LNG}.cron
-
