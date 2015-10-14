@@ -3,7 +3,7 @@
 Summary:	Brazilian man (manual) pages from the Linux Documentation Project
 Name:		man-pages-%{LNG}
 Version:	0.1
-Release:	20
+Release:	21
 License:	GPLv2
 Group:		System/Internationalization
 Url:		http://br.tldp.org/projetos/man/man.html
@@ -16,6 +16,7 @@ BuildRequires:	man
 Requires:	locales-pt
 Requires:	man
 Autoreqprov:	false
+Conflicts:	filesystem < 3.0-17
 
 %description
 A large collection of man pages (reference material) from the Linux 
