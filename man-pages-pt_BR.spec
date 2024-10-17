@@ -6,7 +6,7 @@ Version:	0.1
 Release:	25
 License:	GPLv2
 Group:		System/Internationalization
-Url:		http://br.tldp.org/projetos/man/man.html
+Url:		https://br.tldp.org/projetos/man/man.html
 # the tarball has to build, files got from the web with wget.
 # files dated 2002-11-21 -- pablo
 Source0:	http://br.tldp.org/projetos/man/arquivos/man-pages-pt_BR.tar.bz2
